@@ -58,13 +58,19 @@ public class MyAsyncTask extends AsyncTask<Integer, Integer, ZipcodeEntity> {
     @Override
     protected void onPostExecute(ZipcodeEntity json) {
         try {
+            if (json == null) return;
+
             StringBuilder builder = new StringBuilder();
 
-            for (ResultEntity result : json.getResults()) {
+            if (json.getResults() != null) {
+                for (ResultEntity result : json.getResults()) {
 
-                builder.append("都道府県：").append(result.getAddress1()).append("\n");
-                builder.append("市区町村名：").append(result.getAddress2()).append("\n");
-                builder.append("町域名：").append(result.getAddress3()).append("\n");
+                    builder.append("都道府県：").append(result.getAddress1()).append("\n");
+                    builder.append("市区町村名：").append(result.getAddress2()).append("\n");
+                    builder.append("町域名：").append(result.getAddress3()).append("\n");
+                }
+            } else {
+                builder.append("該当なし");
             }
 
             textView.setText(builder.toString());

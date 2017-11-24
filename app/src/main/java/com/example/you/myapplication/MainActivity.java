@@ -32,6 +32,9 @@ public class MainActivity extends AppCompatActivity {
 
                 if (validateZipcode(editText.getText().toString())) {
 
+                    // 通信開始通知
+                    Toast.makeText(MainActivity.this, "通信開始...", Toast.LENGTH_SHORT).show();
+
                     // 非同期処理で実行
                     MyAsyncTask task = new MyAsyncTask(editText, textView);
                     task.execute();
